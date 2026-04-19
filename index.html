@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Haikyuu!! — Personajes</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header con el título y el botón -->
+<header class="site-header">
+
+    <!-- Decoración: línea de red de voleibol -->
+    <div class="net-decoration">
+        <div class="net-line"></div>
+    </div>
+
+    <div class="header-content">
+        <!-- Logo -->
+        <div class="logo-block">
+            <span class="logo-jp">ハイキュー!!</span>
+            <h1 class="logo-main">HAIKYUU<span class="logo-accent">!!</span></h1>
+            <p class="logo-sub">Explorador de Personajes</p>
+        </div>
+
+        <!-- Botón que activa la carga -->
+        <button id="loadBtn" class="load-btn">
+            <span class="btn-icon">▶</span>
+            <span class="btn-text">Cargar Personajes</span>
+        </button>
+    </div>
+
+    <!-- Muestra cuántos personajes se cargaron -->
+    <div id="counter" class="counter" hidden>
+        <span id="counterNum">0</span> personajes encontrados
+    </div>
+</header>
+
+<div id="statusArea" class="status-area"></div>
+
+<main>
+    <section id="charactersGrid" class="characters-grid"></section>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <p>Datos obtenidos desde <a href="https://jikan.moe" target="_blank">Jikan API</a> · Anime: Haikyuu!!</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

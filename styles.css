@@ -1,0 +1,450 @@
+/* Estilos para la página de personajes de Haikyuu!! */
+:root {
+    --bg: #0c0c0f;
+    --surface: #141418;
+    --surface2: #1c1c22;
+    --border: #2a2a35;
+    --orange: #ff6b00;
+    --orange-glow: rgba(255, 107, 0, 0.35);
+    --orange-dim: rgba(255, 107, 0, 0.12);
+    --white: #f0ede8;
+    --muted: #7a7a8c;
+    --yellow: #ffd166;
+    --font-titulo: 'Bebas Neue', sans-serif;
+    --font-texto: 'Nunito', sans-serif;
+    --radio: 14px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--white);
+    font-family: var(--font-texto);
+    min-height: 100vh;
+    /* Puntitos de fondo */
+    background-image: radial-gradient(circle, rgba(255,107,0,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+}
+
+/* ---- HEADER ---- */
+.site-header {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 32px 40px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    background:
+            radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,107,0,0.18) 0%, transparent 70%),
+            var(--surface);
+}
+
+/* Línea de red al fondo del header */
+.net-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.net-line {
+    height: 3px;
+    background: repeating-linear-gradient(
+            90deg,
+            var(--orange) 0px,
+            var(--orange) 18px,
+            transparent 18px,
+            transparent 28px
+    );
+    opacity: 0.7;
+}
+
+/* Pelota flotante decorativa en la esquina */
+.ball-decoration {
+    position: absolute;
+    top: -30px;
+    right: 40px;
+    width: 120px;
+    height: 120px;
+    color: rgba(255, 107, 0, 0.12);
+    animation: flotar 6s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%       { transform: translateY(14px) rotate(22deg); }
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+/* Bloque del logo */
+.logo-block {
+    line-height: 1;
+}
+
+.logo-jp {
+    display: block;
+    font-family: var(--font-titulo);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    letter-spacing: 0.35em;
+    color: var(--orange);
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.logo-main {
+    font-family: var(--font-titulo);
+    font-size: clamp(3.2rem, 10vw, 6.5rem);
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-shadow: 0 0 40px rgba(255,107,0,0.5);
+    line-height: 1;
+}
+
+.logo-accent {
+    color: var(--orange);
+}
+
+.logo-sub {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Botón principal */
+.load-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 36px;
+    background: var(--orange);
+    color: #0c0c0f;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-titulo);
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 107, 0, 0.45);
+    position: relative;
+    overflow: hidden;
+}
+
+.load-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.load-btn:hover::after {
+    opacity: 1;
+}
+
+.load-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 30px rgba(255, 107, 0, 0.65);
+}
+
+.load-btn:active {
+    transform: scale(0.97);
+}
+
+.load-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Contador de personajes */
+.counter {
+    margin-top: 16px;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+}
+
+#counterNum {
+    color: var(--orange);
+    font-weight: 700;
+    font-family: var(--font-titulo);
+    font-size: 1.1rem;
+}
+
+/* ---- ÁREA DE ESTADO (cargando / error) ---- */
+.status-area {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.loading-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+}
+
+/* El spinner de carga */
+.spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid var(--border);
+    border-top-color: var(--orange);
+    border-radius: 50%;
+    animation: girar 0.75s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+.error-msg {
+    background: rgba(255, 60, 60, 0.08);
+    border: 1px solid rgba(255, 60, 60, 0.3);
+    border-radius: var(--radio);
+    padding: 20px 28px;
+    max-width: 520px;
+    text-align: center;
+    color: #ff8080;
+}
+
+.error-msg strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.error-msg span {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* ---- GRID DE TARJETAS ---- */
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ---- TARJETA ---- */
+.char-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radio);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.55);
+    animation: entradaCard 0.45s ease both;
+}
+
+@keyframes entradaCard {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.char-card:hover {
+    border-color: var(--orange);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 0 28px var(--orange-glow);
+    transform: translateY(-6px);
+    transition: all 0.32s ease;
+}
+
+/* Contenedor de la imagen */
+.char-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--surface2);
+}
+
+.char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.char-card:hover .char-img {
+    transform: scale(1.07);
+}
+
+/* Gradiente para que el texto de abajo se lea bien */
+.char-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+}
+
+/* Badge de rol */
+.char-role-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+}
+
+.badge-main {
+    background: var(--orange);
+    color: #0c0c0f;
+}
+
+.badge-support {
+    background: rgba(255, 209, 102, 0.9);
+    color: #0c0c0f;
+}
+
+/* Información del personaje */
+.char-info {
+    padding: 14px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.char-name {
+    font-family: var(--font-titulo);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1.2;
+}
+
+.char-name-jp {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+}
+
+.char-divider {
+    width: 28px;
+    height: 2px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin: 4px 0;
+}
+
+.char-role {
+    font-size: 0.78rem;
+    color: var(--yellow);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/*  cuando no hay imagen */
+.char-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-titulo);
+    font-size: 3.5rem;
+    color: var(--border);
+    background: var(--surface2);
+}
+
+/* ---- FOOTER ---- */
+.site-footer {
+    text-align: center;
+    padding: 32px;
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+}
+
+.site-footer a {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Scrollbar personalizado para que no quede feo */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 600px) {
+    .site-header {
+        padding: 40px 20px 32px;
+    }
+
+    .ball-decoration {
+        width: 80px;
+        right: 16px;
+    }
+
+    .characters-grid {
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 16px;
+        padding: 20px 16px;
+    }
+
+    .load-btn {
+        font-size: 1rem;
+        padding: 12px 28px;
+    }
+}
