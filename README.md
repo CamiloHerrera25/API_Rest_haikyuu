@@ -99,14 +99,14 @@ Los errores se muestran directamente en la interfaz mediante un contenedor diná
 
 ##  Evidencias
 
-A continuación se deben incluir capturas del funcionamiento del sistema:
+A continuación se incluyen capturas del funcionamiento del sistema:
 
-### 🔹 Carga inicial
+###  Carga inicial
 
 ![Carga inicial](images/evidencias1.png)
 
 
-### 🔹 Renderizado de personajes
+###  Renderizado de personajes
 
 ![Personajes](images/evidencias2.png)
 
